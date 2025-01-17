@@ -1,21 +1,8 @@
 {
 	"private": true,
-	"name": "dragon-flagon-modules",
-	"title": "DragonFlagon FoundryVTT Modules",
-	"type": "module",
-	"keywords": [
-		"foundry",
-		"foundryvtt",
-		"module",
-		"dragon",
-		"flagon",
-		"dragonflagon",
-		"df"
-	],
+	"name": "save-message-to-journal-entry",
 	"source": "src/main.js",
 	"main": "dist/main.js",
-	"author": "flamewave000#0001",
-	"license": "BSD-3-Clause",
 	"scripts": {
 		"prebuild": "rimraf dist .parcel-cache",
 		"build": "parcel build",
@@ -39,7 +26,6 @@
 		"parcel": "^2.13.3",
 		"prettier": "3.4.2",
 		"rimraf": "^6.0.1",
-		"sass": "^1.49.9",
 		"ts-loader": "^9.2.6",
 		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.20.0",
