@@ -15,7 +15,6 @@ export function addContextMenuOptions(_html, options) {
       if (message != null) {
         const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME);
         const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
-        if (game.user.has)
         const page = game.journal?.getName(journalName)?.pages.getName(pageName);
         if (page == null) {
           ui.notifications.error(
