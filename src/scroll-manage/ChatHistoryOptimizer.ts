@@ -1,4 +1,4 @@
-import SETTINGS from "../../../common/Settings";
+import SETTINGS from "../settings";
 import UTIL from "../Util";
 
 export default class ChatHistoryOptimizer {

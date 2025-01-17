@@ -1,6 +1,6 @@
 
 import { ChatMessageData, ChatMessageDataConstructorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
-import SETTINGS from "../../../common/Settings";
+import SETTINGS from "../settings";
 import DFChatEditor from "../edit/DFChatEditor";
 import DFAdventureLogConfig from './DFAdventureLogConfig';
 

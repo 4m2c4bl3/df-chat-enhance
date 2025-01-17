@@ -1,7 +1,7 @@
 import DFChatArchiveNew from "./DFChatArchiveNew";
 import DFChatArchiveManager from "./DFChatArchiveManager";
 import { DFChatArchive } from "./DFChatArchive";
-import SETTINGS from "../../../common/Settings";
+import SETTINGS from "../settings";
 
 
 export function init() {

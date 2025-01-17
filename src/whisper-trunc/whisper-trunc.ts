@@ -1,5 +1,5 @@
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
-import SETTINGS from "../../../common/Settings";
+import SETTINGS from "../settings";
 
 
 const TEMPLATE = "$0: $1 (+$2&nbsp;more)";

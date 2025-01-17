@@ -1,6 +1,5 @@
-import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
-import libWrapperShared from "../../../common/libWrapperShared";
-import SETTINGS from "../../../common/Settings";
+import libWrapperShared from "../libWrapperShared";
+import SETTINGS from "../settings";
 import ChatHistoryOptimizer from "./ChatHistoryOptimizer";
 
 declare class ChatLogExt extends ChatLog {

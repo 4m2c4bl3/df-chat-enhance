@@ -1,5 +1,5 @@
 import { DFChatArchive } from "./DFChatArchive";
-import SETTINGS from "../../../common/Settings";
+import SETTINGS from "../settings";
 
 export default class DFChatArchiveNew extends FormApplication<FormApplicationOptions, { shouldDelete: boolean }> {
 	static readonly PREF_DELETE = 'new-should-delete';

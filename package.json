@@ -2,7 +2,7 @@
 	"private": true,
 	"name": "dragon-flagon-modules",
 	"title": "DragonFlagon FoundryVTT Modules",
-  "type":"module",
+	"type": "module",
 	"keywords": [
 		"foundry",
 		"foundryvtt",
@@ -12,8 +12,13 @@
 		"dragonflagon",
 		"df"
 	],
+	"source": "src/df-chat-enhance.ts",
+  "main": "dist/main.js",
 	"author": "flamewave000#0001",
 	"license": "BSD-3-Clause",
+  "scripts": {
+    "build": "parcel build"
+  },
 	"dependencies": {
 		"@eslint/eslintrc": "^3.2.0",
 		"@eslint/js": "^9.18.0",
@@ -26,6 +31,7 @@
 		"eslint-plugin-prettier": "^5.2.2",
 		"fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
 		"globals": "^15.14.0",
+		"parcel": "^2.13.3",
 		"prettier": "3.4.2",
 		"sass": "^1.49.9",
 		"ts-loader": "^9.2.6",
