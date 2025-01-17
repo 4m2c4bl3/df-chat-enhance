@@ -1,6 +1,5 @@
-import { ChatMessageData } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs';
+import { ChatMessageData } from 'node_modules/fvtt-types/src/foundry/common/documents/_types.mjs';
 import SETTINGS from '../settings';
-
 const TEMPLATE = '$0: $1 (+$2&nbsp;more)';
 const LENGTH_ADJUST = '&nbsp;'.length - 1;
 
@@ -18,9 +17,13 @@ export default class WhisperTruncation {
       default: true,
       scope: 'world',
       onChange: async () => {
-        (<any>ui.chat)._state = 0;
-        (<any>ui.chat)._lastId = null;
-        await ui.chat.render(true);
+        if (ui.chat != null){
+           // @ts-ignore
+          ui.chat._state = 0;
+           // @ts-ignore
+          ui.chat_lastId = null;
+          await ui.chat.render(true);
+        }
       },
     });
     SETTINGS.register(this.PREF_CHAR_LIMIT, {
@@ -31,9 +34,13 @@ export default class WhisperTruncation {
       default: 50,
       scope: 'world',
       onChange: async () => {
-        (<any>ui.chat)._state = 0;
-        (<any>ui.chat)._lastId = null;
-        await ui.chat.render(true);
+        if (ui.chat != null){
+           // @ts-ignore
+          ui.chat._state = 0;
+           // @ts-ignore
+          ui.chat._lastId = null;
+          await ui.chat.render(true);
+        }
       },
     });
   }
@@ -44,9 +51,9 @@ export default class WhisperTruncation {
     _cmd: ChatMessageData,
   ) {
     // ignore regular messages, or whispers with only 1 recipient
-    if (!SETTINGS.get(this.PREF_ENABLED) || !message.whisper || message.whisper.length <= 1) return;
-    const users = message.whisper.map((x) => game.users.get(x));
-    let accum = users[0].name;
+    if (!SETTINGS.get(this.PREF_ENABLED) || !message.whisper || !game.users || message.whisper.length <= 1) return;
+    const users = (message.whisper.map((x) => game.users.get(x as string)).filter(u => u != null) ?? []) as unknown as Users[];
+    let accum : string = users[0].name ?? '';
     let title = this._formatTitle(accum, users.length - 1);
     let c = 1;
     const CHAR_LIMIT = SETTINGS.get<number>(this.PREF_CHAR_LIMIT);
