@@ -1,5 +1,5 @@
 <div class="tab active" data-tab="general">
-  <form autocomplete="off" class="hide-player-ui settings-form">
+  <form autocomplete="off" class="save-message-to-journal-entry settings-form">
     <script>
       //Selecting correct values
       document.querySelector("#journalName option[value='{{journalName}}']").selected = true;
@@ -7,7 +7,7 @@
       </script>
      <div class="form-group">
         <label for="journalName"
-           >{{localize "journalNameConfig"}}</label
+           >{{localize "saveMessageToJournalEntry.journalSelection"}}</label
         >
         <div class="flexrow">
           <select id="journalName" name="journalName" value="{{journalName}}">
@@ -17,7 +17,7 @@
           </select>
       </div>
       <label for="pageName"
-         >{{localize "pageNameConfig"}}</label
+         >{{localize "saveMessageToJournalEntry.pageSelection"}}</label
       >
       <div class="flexrow">
         <select id="pageName" name="pageName" value="{{pageName}}">
@@ -27,17 +27,10 @@
         </select>
     </div>
         <p class="notes">
-           {{localize "pageNameWarning"}}
+           {{localize "saveMessageToJournalEntry.pageNameWarning"}}
         </p>
      </div>
-
-     <div class="warning-note">
-        <p>
-           {{localize "hide-player-ui.settings-form.refresh-player-sessions"}}
-        </p>
-     </div>
-
-     <div class="form-group" style="margin: 10px">
+     <!-- <div class="form-group" style="margin: 10px">
         <button type="submit" name="submit">
            <i class="fas fa-save"></i> {{localize
            "hide-player-ui.settings-form.save"}}
@@ -46,6 +39,6 @@
            <i class="fas fa-undo"></i> {{localize
            "hide-player-ui.settings-form.reset"}}
         </button>
-     </div>
+     </div> -->
   </form>
 </div>
