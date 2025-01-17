@@ -9,6 +9,7 @@
 		"postbuild": "node build.js",
 		"lint": "eslint --fix"
 	},
+	"type": "module",
 	"files": [],
 	"dependencies": {
 		"@eslint/eslintrc": "^3.2.0",

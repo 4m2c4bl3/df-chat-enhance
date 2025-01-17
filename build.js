@@ -9,9 +9,11 @@ zip.addFile('module.json');
 zip.addFile('README.md');
 zip.archive(`./${zipName}`).then(
   function () {
+    // eslint-disable-next-line no-undef
     console.log(`Created ${zipName}`);
   },
   function (err) {
+    // eslint-disable-next-line no-undef
     console.log(err);
   },
 );
