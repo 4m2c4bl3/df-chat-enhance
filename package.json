@@ -1,0 +1,35 @@
+{
+	"private": true,
+	"name": "dragon-flagon-modules",
+	"title": "DragonFlagon FoundryVTT Modules",
+  "type":"module",
+	"keywords": [
+		"foundry",
+		"foundryvtt",
+		"module",
+		"dragon",
+		"flagon",
+		"dragonflagon",
+		"df"
+	],
+	"author": "flamewave000#0001",
+	"license": "BSD-3-Clause",
+	"dependencies": {
+		"@eslint/eslintrc": "^3.2.0",
+		"@eslint/js": "^9.18.0",
+		"@stylistic/eslint-plugin": "^2.13.0",
+		"@typescript-eslint/eslint-plugin": "^8.20.0",
+		"@typescript-eslint/parser": "^8.20.0",
+		"eslint": "^9.18.0",
+		"eslint-config-love": "^117.0.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-prettier": "^5.2.2",
+		"fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+		"globals": "^15.14.0",
+		"prettier": "3.4.2",
+		"sass": "^1.49.9",
+		"ts-loader": "^9.2.6",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.20.0"
+	}
+}
