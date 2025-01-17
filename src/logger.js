@@ -43,7 +43,7 @@ class SelectJournalConfigurationForm extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.id = SYSTEM + 'configuration';
-    options.template = `modules/${SYSTEM}/templates/settings_form.html`;
+    options.template = `modules/${SYSTEM}/templates/settings_form.hbs`;
     options.width = 400;
     options.submitOnChange = true;
     return options;
