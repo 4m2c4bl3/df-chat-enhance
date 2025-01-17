@@ -6,22 +6,32 @@ export function addContextMenuOptions(_html, options) {
     name: 'actionDescription',
     icon: '<i class="fas fa-edit"></i>',
     group: SYSTEM,
-    condition: (_li) => {
-      return true;
-    },
+    // condition: (_li) => {
+    //   return true;
+    // },
     callback: async (li) => {
       const messageId = li.data('messageId');
       const message = game?.messages?.get(messageId);
       if (message != null) {
         const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME);
         const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
-        const existingJournal = game.journal?.getName(journalName)?.pages.getName(pageName);
-        if (existingJournal == null) {
+        const page = game.journal?.getName(journalName)?.pages.getName(pageName);
+        if (page == null) {
           ui.notifications.error(game.i18n.localize('error.noJournalSet'));
           return;
         }
-        const newEntry = message.getHTML();
-        await existingJournal.update({ text: { content: newEntry + '<hr>' + existingJournal } });
+        const newEntry = await message.getHTML();
+        newEntry.addClass('save-message-to-journal-entry');
+        const metadata = newEntry.find('.message-metadata')[0];
+        const timestamp = newEntry.find('.message-timestamp')[0];
+        timestamp.innerText = new Date(message.timestamp).toLocaleString();
+        metadata.replaceChildren(timestamp);
+        await page.update({
+          text: {
+            content: newEntry[0].outerHTML + '<hr>' + page.text.content,
+            format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
+          },
+        });
       }
     },
   });
