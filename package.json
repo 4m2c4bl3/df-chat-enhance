@@ -12,7 +12,7 @@
 		"dragonflagon",
 		"df"
 	],
-	"source": "src/df-chat-enhance.ts",
+	"source": "src/main.js",
 	"main": "dist/main.js",
 	"author": "flamewave000#0001",
 	"license": "BSD-3-Clause",

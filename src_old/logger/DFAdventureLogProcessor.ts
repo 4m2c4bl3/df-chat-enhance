@@ -1,10 +1,8 @@
-import {
-  ChatMessageData,
-  ChatMessageDataConstructorData,
-} from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData';
-import SETTINGS from '../settings';
+
+import SETTINGS from '../../settings';
 import DFChatEditor from '../edit/DFChatEditor';
 import DFAdventureLogConfig from './DFAdventureLogConfig';
+import { ChatMessageData } from 'node_modules/fvtt-types/src/foundry/common/documents/_types.mjs';
 
 declare global {
   namespace SimpleCalendar.api {
@@ -93,9 +91,9 @@ export default class DFAdventureLogProcessor {
   static readonly PREF_SIMPLE_CALENDAR = 'df-log-use-simple-calendar';
   static readonly PREF_USE_TIME = 'df-log-use-time';
   static readonly PREF_PLAYER_LOG_JOURNAL = 'PlayerAdventureLog';
-  static logCommand: ChatCommand = null;
-  static gmlogCommand: ChatCommand = null;
-  static plogCommand: ChatCommand = null;
+  static logCommand?: ChatCommand;
+  static gmlogCommand?: ChatCommand;
+  static plogCommand?: ChatCommand;
 
   static appendChatContextMenuOptions(options: ContextMenu.Item[]) {
     options.push({

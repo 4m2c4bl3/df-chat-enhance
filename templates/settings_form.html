@@ -1,0 +1,51 @@
+<div class="tab active" data-tab="general">
+  <form autocomplete="off" class="hide-player-ui settings-form">
+    <script>
+      //Selecting correct values
+      document.querySelector("#journalName option[value='{{journalName}}']").selected = true;
+      document.querySelector("#pageName option[value='{{pageName}}']").selected = true;
+      </script>
+     <div class="form-group">
+        <label for="journalName"
+           >{{localize "journalNameConfig"}}</label
+        >
+        <div class="flexrow">
+          <select id="journalName" name="journalName" value="{{journalName}}">
+              {{#each journalNameOptions}}
+                  <option value="{{this}}">{{this}}</option>
+              {{/each}}
+          </select>
+      </div>
+      <label for="pageName"
+         >{{localize "pageNameConfig"}}</label
+      >
+      <div class="flexrow">
+        <select id="pageName" name="pageName" value="{{pageName}}">
+            {{#each pageNameOptions}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+        <p class="notes">
+           {{localize "pageNameWarning"}}
+        </p>
+     </div>
+
+     <div class="warning-note">
+        <p>
+           {{localize "hide-player-ui.settings-form.refresh-player-sessions"}}
+        </p>
+     </div>
+
+     <div class="form-group" style="margin: 10px">
+        <button type="submit" name="submit">
+           <i class="fas fa-save"></i> {{localize
+           "hide-player-ui.settings-form.save"}}
+        </button>
+        <button type="button" name="reset">
+           <i class="fas fa-undo"></i> {{localize
+           "hide-player-ui.settings-form.reset"}}
+        </button>
+     </div>
+  </form>
+</div>

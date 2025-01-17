@@ -1,9 +1,7 @@
 import globals from "globals";
 import eslint from "@eslint/js";
-import tseslint from 'typescript-eslint';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import stylistic from '@stylistic/eslint-plugin';
-import { rules } from "eslint-config-prettier";
 
 export default [
 	{
@@ -18,11 +16,10 @@ export default [
 		]
 	},
 	eslint.configs.recommended,
-	...tseslint.configs.recommendedTypeChecked,
 	eslintPluginPrettierRecommended,
 	{
 		...import('eslint-config-love'),
-		files: ["src/**/*.ts"],
+		files: ["src/**/*.{ts,js}"],
 		plugins: {
 			'@stylistic': stylistic
 		},
@@ -36,7 +33,7 @@ export default [
 			}
 		},
 		rules: {
-			'@typescript-eslint/no-unused-vars': [
+			'no-unused-vars': [
 				'error',
 				{
 					args: 'all',

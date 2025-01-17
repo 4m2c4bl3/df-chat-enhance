@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src_old/Util.ts", "src_old/settings.ts", "src_old/libWrapperShared.ts", "src_old/df-chat-enhance.ts", "src_old/logger/DFAdventureLogProcessor.ts", "src/logger.js", "src/main.js"],
 	"compilerOptions": {
 		"incremental": true,
 		"target": "ESNext",

@@ -1,5 +1,5 @@
-import SETTINGS from '../settings';
-import UTIL from '../Util';
+import SETTINGS from '../../settings';
+import UTIL from '../../Util';
 
 export default class ChatTime {
   private static readonly PREF_ENABLED = 'ChatTime.UseSimpleCalender';

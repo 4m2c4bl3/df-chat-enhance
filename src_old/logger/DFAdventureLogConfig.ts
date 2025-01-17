@@ -1,4 +1,4 @@
-import SETTINGS from '../settings';
+import SETTINGS from '../../settings';
 import DFAdventureLogProcessor from './DFAdventureLogProcessor';
 
 export default class DFAdventureLogConfig extends FormApplication {

@@ -1,5 +1,5 @@
-import libWrapperShared from '../libWrapperShared';
-import SETTINGS from '../settings';
+import libWrapperShared from '../../libWrapperShared';
+import SETTINGS from '../../settings';
 import DFAdventureLogConfig from './DFAdventureLogConfig';
 import DFAdventureLogProcessor from './DFAdventureLogProcessor';
 
