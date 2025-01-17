@@ -27,7 +27,7 @@
 		]
 	},
 	"scripts": [ "libs/marked.min.js" ],
-	"esmodules": ["src/main.js"],
+	"esmodules": ["src/df-chat-enhance.js"],
 	"styles": ["css/df-chat-enhance.css"],
 	"languages": [
 		{ "lang": "en", "name": "English", "path": "lang/en.json" },
@@ -37,14 +37,13 @@
 		{ "lang": "ko", "name": "한국어", "path": "lang/ko.json" },
 		{ "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
 	],
-	"url":		"https://github.com/flamewave000/dragonflagon-fvtt/tree/master/df-chat-enhance",
-	"license":	"https://raw.githubusercontent.com/flamewave000/dragonflagon-fvtt/master/LICENSE",
-	"manifest":	"https://dragonflagon.cafe/mods/man/df-chat-enhance",
-	"download":	"https://dragonflagon.cafe/mods/pak/df-chat-enhance",
-	"readme":	"https://github.com/flamewave000/dragonflagon-fvtt/tree/master/df-chat-enhance/README.md",
-	"changelog":"https://github.com/flamewave000/dragonflagon-fvtt/tree/master/df-chat-enhance/CHANGELOG.md",
+	"url":		"https://github.com/4m2c4bl3/df-chat-enhance",
+	"license":	"https://raw.githubusercontent.com/4m2c4bl3/tree/master/LICENSE",
+	"manifest":	"https://github.com/4m2c4bl3/df-chat-enhance/releases/latest/download/module.json",
+	"download":	"n/a",
+	"readme":	"https://github.com/4m2c4bl3/df-chat-enhance/tree/master/README.md",
+	"changelog":"https://github.com/4m2c4bl3/df-chat-enhance/tree/master/CHANGELOG.md",
 	"manifestPlusVersion": "1.0.0",
-	"bugs": "https://github.com/flamewave000/dragonflagon-fvtt/issues/new/choose",
 	"authors": [ { "name": "flamewave000", "discord": "flamewave000#0001", "url": "https://github.com/flamewave000" } ],
 	"media": []
 }
