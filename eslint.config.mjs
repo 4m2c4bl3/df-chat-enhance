@@ -3,7 +3,6 @@ import globals from "globals";
 import eslint from "@eslint/js";
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import { FlatCompat } from "@eslint/eslintrc";
 import stylistic from '@stylistic/eslint-plugin';
 
 export default [
@@ -17,7 +16,10 @@ export default [
 			".git/",
 			"**/*.d.ts",
 			"**/*.{json}",
+			"*.{mjs}",
+			"dist/"
 		],
+		files: ["src/**/*.ts"],
 		plugins: {
 			"@typescript-eslint": typescriptEslint,
 			'@stylistic': stylistic
@@ -27,7 +29,7 @@ export default [
 				...globals.browser,
 			},
 			parserOptions: {
-				projectService: true,
+        projectService: true,
 				tsconfigRootDir: import.meta.dirname
 			}
 		}
