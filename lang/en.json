@@ -1,11 +1,16 @@
 {
-	"editSettingsTitle": "Select Message Journal",
-	"journalNameConfig": "Journal",
-	"pageNameConfig": "Page",
-	"pageNameBackup": "Noted Messages",
-	"pageNameWarning": "If no page is chosen, a new page called Noted Messages will be created.<br/>If the selected page is deleted or renamed, a new page called Noted Messages will be created.",
+	"saveMessageToJournalEntry": {
+		"settings": {
+			"title": "Select Message Journal",
+			"journalNameDesc": "Journal",
+			"pageNameConfig": "Page",
+			"pageNameWarning": "If no page is chosen, a new page called Noted Messages will be created.<br/>If the selected page is deleted or renamed, a new page called Noted Messages will be created."
+		},
 		"error": {
+			"journalNotFound": "Unable to find your chosen Journal [{journalName}]. It might have been renamed or deleted.",
 			"noJournalSet": "A Journal has not been selected in your configuration."
 		},
-	"actionDescription": "Write Message to Journal"
+		"defaultPageName": "Noted Messages",
+		"actionDescription": "Write Message to Journal"
+	}
 }

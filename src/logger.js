@@ -3,7 +3,7 @@ import { SYSTEM, JOURNAL_NAME, PAGE_NAME } from './settings';
 
 export function addContextMenuOptions(_html, options) {
   options.unshift({
-    name: 'actionDescription',
+    name: 'saveMessageToJournalEntry.actionDescription',
     icon: '<i class="fas fa-edit"></i>',
     group: SYSTEM,
     // condition: (_li) => {
@@ -17,7 +17,9 @@ export function addContextMenuOptions(_html, options) {
         const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
         const page = game.journal?.getName(journalName)?.pages.getName(pageName);
         if (page == null) {
-          ui.notifications.error(game.i18n.localize('error.noJournalSet'));
+          ui.notifications.error(
+            game.i18n.localize('saveMessageToJournalEntry.error.noJournalSet'),
+          );
           return;
         }
         const newEntry = await message.getHTML();
@@ -40,14 +42,14 @@ export function addContextMenuOptions(_html, options) {
 class SelectJournalConfigurationForm extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.id = SYSTEM + 'edit';
+    options.id = SYSTEM + 'configuration';
     options.template = `modules/${SYSTEM}/templates/settings_form.html`;
     options.width = 400;
     options.submitOnChange = true;
     return options;
   }
   get title() {
-    return game.i18n.localize('editSettingsTitle');
+    return game.i18n.localize('saveMessageToJournalEntry.settings.title');
   }
 
   getValidJournals() {
@@ -67,7 +69,7 @@ class SelectJournalConfigurationForm extends FormApplication {
       .find((j) => j.name == journalName)
       ?.pages.filter((p) => p.canUserModify(game.user))
       .map((p) => p.name)
-      .unshift(game.i18n.localize('pageNameBackup'));
+      .unshift(game.i18n.localize('saveMessageToJournalEntry.defaultPageName'));
     const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
 
     return {
@@ -79,7 +81,8 @@ class SelectJournalConfigurationForm extends FormApplication {
   }
 
   async _updateObject(_event, formData) {
-    const { journalName, pageName = game.i18n.localize('pageNameBackup') } = formData;
+    const defaultPageName = game.i18n.localize('saveMessageToJournalEntry.defaultPageName');
+    const { journalName, pageName = defaultPageName } = formData;
 
     if (journalName != null) {
       const journalNameOld = game.user.getFlag(SYSTEM, JOURNAL_NAME);
@@ -87,7 +90,9 @@ class SelectJournalConfigurationForm extends FormApplication {
       if (journal != null && journalNameOld != journalName) {
         game.user.setFlag(SYSTEM, JOURNAL_NAME, journalName);
       } else if (journal == null) {
-        ui.notifications.error('This journal donut exist, idk what you did bro.');
+        ui.notifications.error(
+          game.i18n.format('saveMessageToJournalEntry.error.journalNotFound', { journalName }),
+        );
         return;
       }
 
@@ -95,7 +100,7 @@ class SelectJournalConfigurationForm extends FormApplication {
       const page = journal.pages.getName(pageName);
       if (page != null && pageName != pageNameOld) {
         game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
-      } else if (page == null && pageName == game.i18n.localize('pageNameBackup')) {
+      } else if (page == null && pageName == defaultPageName) {
         await JournalEntryPage.createDocuments([{ name: pageName }], { parent: journal });
         game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
       }
@@ -106,9 +111,9 @@ class SelectJournalConfigurationForm extends FormApplication {
 }
 
 export function initSettings() {
-  game.settings.registerMenu('hide-player-ui', 'hide-player-ui-player-configuration', {
-    name: 'editSettingsTitle',
-    label: 'editSettingsTitle',
+  game.settings.registerMenu(SYSTEM, SYSTEM + 'configuration', {
+    name: 'saveMessageToJournalEntry.settings.title',
+    label: 'saveMessageToJournalEntry.settings.title',
     icon: 'fas fa-cogs',
     type: SelectJournalConfigurationForm,
     restricted: false,
