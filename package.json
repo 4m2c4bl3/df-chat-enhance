@@ -18,7 +18,8 @@
 	"license": "BSD-3-Clause",
 	"scripts": {
 		"prebuild": "rimraf dist .parcel-cache",
-		"build": "parcel build"
+		"build": "parcel build",
+		"lint": "eslint --fix"
 	},
 	"dependencies": {
 		"@eslint/eslintrc": "^3.2.0",

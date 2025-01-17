@@ -20,16 +20,10 @@ export default class SETTINGS {
       };
     }
   }
-  static register<T>(
-    key: string,
-    config: ClientSettings.PartialSettingConfig<T>,
-  ) {
+  static register<T>(key: string, config: ClientSettings.PartialSettingConfig<T>) {
     game.settings.register(SETTINGS.MOD_NAME, key, config);
   }
-  static registerMenu(
-    key: string,
-    config: ClientSettings.PartialSettingSubmenuConfig,
-  ) {
+  static registerMenu(key: string, config: ClientSettings.PartialSettingSubmenuConfig) {
     game.settings.registerMenu(SETTINGS.MOD_NAME, key, config);
   }
   static get<T>(key: string): T {
@@ -39,7 +33,7 @@ export default class SETTINGS {
     return await game.settings.set(SETTINGS.MOD_NAME, key, value);
   }
   static default<T>(key: string): T {
-    return <T>game.settings.settings.get(SETTINGS.MOD_NAME + "." + key).default;
+    return <T>game.settings.settings.get(SETTINGS.MOD_NAME + '.' + key).default;
   }
   /** helper for referencing a Typed constructor for the `type` field of a setting { type: SETTINGS.typeOf<MyClass>() } */
   static typeOf<T>(): ConstructorOf<T> {
