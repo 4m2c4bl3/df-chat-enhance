@@ -83,13 +83,13 @@ class SelectJournalConfigurationForm extends FormApplication {
   getData(_options) {
     const validJournals = this.getValidJournals();
 
-    const journalNameOptions = validJournals.map((j) => j.name);
+    const journalNameOptions = validJournals.map((j) => ({ key: j.name, label: j.name }));
     const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME) ?? journalNameOptions[0];
 
     const pageNameOptions = validJournals
       .find((j) => j.name == journalName)
       ?.pages.filter((p) => p.canUserModify(game.user))
-      .map((p) => p.name) ?? [getDefaultPageName()];
+      .map((p) => ({ key: p.name, label: p.name })) ?? [getDefaultPageName()];
     if (!pageNameOptions.includes(getDefaultPageName())) {
       pageNameOptions.unshift(getDefaultPageName());
     }
@@ -109,6 +109,7 @@ class SelectJournalConfigurationForm extends FormApplication {
   }
 
   activateListeners(html) {
+    super.activateListeners(html);
     const closeButton = html[0].querySelector('.close');
     if (!closeButton) {
       module.logger.error(`Could not find .close button when adding listeners`);

@@ -1,25 +1,23 @@
-<div class="tab active" data-tab="general">
-   <form autocomplete="off" class="save-message-to-journal-entry settings-form">
-      <div class="form-group">
-         <label for="journalName">{{localize 'SMTJE.settings.journalSelection'}}</label>
-         <select name="journalName">
-            {{selectOptions journalNameOptions selected=journalName}}
-         </select>
-      </div>
-      <div class="form-group">
-         <label for="pageName">{{localize 'SMTJE.settings.pageSelection'}}</label>
-         <select id="pageName">
-            {{selectOptions pageNameOptions selected=pageName}}
-         </select>
-      </div>
-      <p class="notes">
-         {{localize 'SMTJE.settings.pageNameWarning'}}
-      </p>
-      <div class="form-group" style="margin: 10px">
-         <button type="button" class="close">
-            <i class="fas fa-x"></i>
-            Close
-         </button>
-      </div>
-   </form>
-</div>
+<form autocomplete="off" class="save-message-to-journal-entry settings-form">
+   <div class="form-group">
+      <label for="journalName">{{localize 'SMTJE.settings.journalSelection'}}</label>
+      <select name="journalName">
+         {{selectOptions journalNameOptions selected=journalName sort=true valueAttr="key" labelAttr="label"}}
+      </select>
+   </div>
+   <div class="form-group">
+      <label for="pageName">{{localize 'SMTJE.settings.pageSelection'}}</label>
+      <select id="pageName">
+         {{selectOptions pageNameOptions selected=pageName valueAttr="key" labelAttr="label"}}
+      </select>
+   </div>
+   <p class="notes">
+      {{localize 'SMTJE.settings.pageNameWarning'}}
+   </p>
+   <div class="form-group" style="margin: 10px">
+      <button type="button" class="close">
+         <i class="fas fa-x"></i>
+         Close
+      </button>
+   </div>
+</form>
