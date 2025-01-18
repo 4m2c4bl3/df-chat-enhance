@@ -16,14 +16,19 @@ export function addContextMenuOptions(_html, options) {
       const message = game?.messages?.get(messageId);
       if (message != null) {
         const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME);
-        const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
-        const journal = game.journal?.getName(journalName);
-        let page = journal?.pages.getName(pageName);
-
-        if (journal == null) {
+        if (journalName == null) {
           ui.notifications.warn(game.i18n.localize('SMTJE.error.noJournalSet'));
           return;
         }
+
+        const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
+        const journal = game.journal?.getName(journalName);
+        if (journal == null) {
+          ui.notifications.warn(game.i18n.format('SMTJE.error.journalNotFound', { journalName }));
+          return;
+        }
+
+        let page = journal?.pages.getName(pageName);
         if (page == null) {
           const noPageNameSet = pageName == '' || pageName == null;
           if (noPageNameSet) {
