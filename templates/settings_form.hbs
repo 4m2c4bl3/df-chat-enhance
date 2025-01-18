@@ -2,11 +2,18 @@
    <form autocomplete="off" class="save-message-to-journal-entry settings-form">
       <script>
          //Selecting correct values
+         debugger;
          document.querySelector("#journalName option[value='{{journalName}}']").selected = true;
-         document.querySelector("#pageName option[value='{{pageName}}']").selected = true;
+         const existingPageValue = document.querySelector("#pageName option[value='{{pageName}}']");
+         const defaultPageValue = document.querySelector("#pageName option[value='{{localize 'SMTJE.defaultPageName'}}']");
+         if (existingPageValue != null) {
+            existingPageValue.selected = true;
+         }else if (defaultPageValue != null){
+            defaultPageValue.selected = true;
+         }
       </script>
       <div class="form-group">
-         <label for="journalName">{{localize "SMTJE.journalSelection"}}</label>
+         <label for="journalName">{{localize 'SMTJE.journalSelection'}}</label>
          <select id="journalName" name="journalName" value="{{journalName}}">
             {{#each journalNameOptions}}
             <option value="{{this}}">{{this}}</option>
@@ -14,7 +21,7 @@
          </select>
       </div>
       <div class="form-group">
-         <label for="pageName">{{localize "SMTJE.pageSelection"}}</label>
+         <label for="pageName">{{localize 'SMTJE.pageSelection'}}</label>
          <select id="pageName" name="pageName" value="{{pageName}}">
             {{#each pageNameOptions}}
             <option value="{{this}}">{{this}}</option>
@@ -22,7 +29,7 @@
          </select>
       </div>
       <p class="notes">
-         {{localize "SMTJE.pageNameWarning"}}
+         {{localize 'SMTJE.pageNameWarning'}}
       </p>
       <div class="form-group" style="margin: 10px">
          <button type="button" class="close">
