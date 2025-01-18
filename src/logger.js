@@ -21,6 +21,7 @@ export function addContextMenuOptions(_html, options) {
         const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
         const journal = game.journal?.getName(journalName);
         let page = journal?.pages.getName(pageName);
+
         if (journal == null) {
           ui.notifications.warn(game.i18n.localize('SMTJE.error.noJournalSet'));
           return;
@@ -34,6 +35,7 @@ export function addContextMenuOptions(_html, options) {
               game.i18n.format('SMTJE.error.pageMissing', { pageName, journalName }),
             );
           }
+
           const newPageName = noPageNameSet ? getDefaultPageName() : pageName;
           await JournalEntryPage.createDocuments([{ name: newPageName }], {
             parent: journal,
@@ -41,12 +43,14 @@ export function addContextMenuOptions(_html, options) {
           page = journal?.pages.getName(newPageName);
           game.user.setFlag(SYSTEM, PAGE_NAME, newPageName);
         }
+
         const newEntry = await message.getHTML();
         newEntry.addClass('save-message-to-journal-entry');
         const metadata = newEntry.find('.message-metadata')[0];
         const timestamp = newEntry.find('.message-timestamp')[0];
         timestamp.innerText = new Date(message.timestamp).toLocaleString();
         metadata.replaceChildren(timestamp);
+
         await page.update({
           text: {
             content: newEntry[0].outerHTML + '<hr>' + (page?.text?.content ?? ''),
@@ -99,6 +103,20 @@ class SelectJournalConfigurationForm extends FormApplication {
     };
   }
 
+  onClose(event) {
+    event.preventDefault();
+    void this.close();
+  }
+
+  activateListeners(html) {
+    const closeButton = html[0].querySelector('.close');
+    if (!closeButton) {
+      module.logger.error(`Could not find .close button when adding listeners`);
+    } else {
+      closeButton.addEventListener('click', this.onClose.bind(this));
+    }
+  }
+
   async _updateObject(_event, formData) {
     const { journalName, pageName = getDefaultPageName() } = formData;
 
@@ -114,6 +132,7 @@ class SelectJournalConfigurationForm extends FormApplication {
 
       const pageNameOld = game.user.getFlag(SYSTEM, PAGE_NAME);
       const page = journal.pages.getName(pageName);
+
       if (page != null && pageName != pageNameOld) {
         game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
       } else if (page == null && pageName == getDefaultPageName()) {
@@ -122,7 +141,9 @@ class SelectJournalConfigurationForm extends FormApplication {
       }
     }
 
-    this.render();
+    setTimeout(() => {
+      this.render();
+    }, 100);
   }
 }
 
