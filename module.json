@@ -3,7 +3,6 @@
 	"title": "Save Message To Journal Entry",
 	"description": "What it says on the can.",
 	"version": "1.0.3",
-	"author": "4m2c4bl3",
 	"esmodules": [
 		"src/main.js"
 	],
