@@ -1,21 +1,20 @@
 <div class="tab active" data-tab="general">
-  <form autocomplete="off" class="save-message-to-journal-entry settings-form">
-    <script>
-      //Selecting correct values
-      document.querySelector("#journalName option[value='{{journalName}}']").selected = true;
-      document.querySelector("#pageName option[value='{{pageName}}']").selected = true;
+   <form autocomplete="off" class="save-message-to-journal-entry settings-form">
+      <script>
+         //Selecting correct values
+         document.querySelector("#journalName option[value='{{journalName}}']").selected = true;
+         document.querySelector("#pageName option[value='{{pageName}}']").selected = true;
       </script>
       <div class="form-group">
-      <label for="journalName">{{localize "SMTJE.journalSelection"}}</label>
-      <div class="flexrow">
+         <label for="journalName">{{localize "SMTJE.journalSelection"}}</label>
          <select id="journalName" name="journalName" value="{{journalName}}">
             {{#each journalNameOptions}}
             <option value="{{this}}">{{this}}</option>
             {{/each}}
          </select>
       </div>
-      <label for="pageName">{{localize "SMTJE.pageSelection"}}</label>
-      <div class="flexrow">
+      <div class="form-group">
+         <label for="pageName">{{localize "SMTJE.pageSelection"}}</label>
          <select id="pageName" name="pageName" value="{{pageName}}">
             {{#each pageNameOptions}}
             <option value="{{this}}">{{this}}</option>
@@ -25,6 +24,11 @@
       <p class="notes">
          {{localize "SMTJE.pageNameWarning"}}
       </p>
-   </div>
-</form>
+      <div class="form-group" style="margin: 10px">
+         <button type="button" class="close">
+            <i class="fas fa-x"></i>
+            Close
+         </button>
+      </div>
+   </form>
 </div>

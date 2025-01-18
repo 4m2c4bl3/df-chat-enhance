@@ -63,12 +63,13 @@ class SelectJournalConfigurationForm extends FormApplication {
     const options = super.defaultOptions;
     options.id = SYSTEM + 'configuration';
     options.template = `modules/${SYSTEM}/templates/settings_form.hbs`;
-    options.width = 400;
+    options.width = 350;
     options.submitOnChange = true;
+    options.closeOnSubmit = false;
     return options;
   }
   get title() {
-    return game.i18n.localize('SMTJE.settings.title');
+    return game.i18n.localize('SMTJE.settings.label');
   }
 
   getValidJournals() {
@@ -81,12 +82,13 @@ class SelectJournalConfigurationForm extends FormApplication {
     const journalNameOptions = validJournals.map((j) => j.name);
     const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME) ?? journalNameOptions[0];
 
-    const pageNameOptions = (
-      validJournals
-        .find((j) => j.name == journalName)
-        ?.pages.filter((p) => p.canUserModify(game.user))
-        .map((p) => p.name) ?? []
-    ).unshift(getDefaultPageName());
+    const pageNameOptions = validJournals
+      .find((j) => j.name == journalName)
+      ?.pages.filter((p) => p.canUserModify(game.user))
+      .map((p) => p.name) ?? [getDefaultPageName()];
+    if (!pageNameOptions.includes(getDefaultPageName())) {
+      pageNameOptions.unshift(getDefaultPageName());
+    }
     const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? getDefaultPageName();
 
     return {
