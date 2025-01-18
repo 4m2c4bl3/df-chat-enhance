@@ -1,7 +1,6 @@
 import globals from "globals";
 import eslint from "@eslint/js";
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import stylistic from '@stylistic/eslint-plugin';
 
 export default [
 	{
@@ -18,18 +17,13 @@ export default [
 	eslint.configs.recommended,
 	eslintPluginPrettierRecommended,
 	{
-		...import('eslint-config-love'),
 		files: ["src/**/*.{ts,js}"],
-		plugins: {
-			'@stylistic': stylistic
-		},
 		languageOptions: {
 			globals: {
 				...globals.browser,
 			},
 			parserOptions: {
         projectService: true,
-				tsconfigRootDir: import.meta.dirname
 			}
 		},
 		rules: {

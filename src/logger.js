@@ -10,9 +10,7 @@ export function addContextMenuOptions(_html, options) {
     name: 'SMTJE.actionDescription',
     icon: '<i class="fas fa-edit"></i>',
     group: SYSTEM,
-    // condition: (_li) => {
-    //   return true;
-    // },
+
     callback: async (li) => {
       const messageId = li.data('messageId');
       const message = game?.messages?.get(messageId);
@@ -86,13 +84,16 @@ class SelectJournalConfigurationForm extends FormApplication {
     const journalNameOptions = validJournals.map((j) => ({ key: j.name, label: j.name }));
     const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME) ?? journalNameOptions[0];
 
-    const pageNameOptions = validJournals
-      .find((j) => j.name == journalName)
-      ?.pages.filter((p) => p.canUserModify(game.user))
-      .map((p) => ({ key: p.name, label: p.name })) ?? [getDefaultPageName()];
-    if (!pageNameOptions.includes(getDefaultPageName())) {
-      pageNameOptions.unshift(getDefaultPageName());
-    }
+    const defaultPageNameOption = { key: getDefaultPageName(), label: getDefaultPageName() };
+    const pageNameOptions =
+      validJournals
+        .find((j) => j.name == journalName)
+        ?.pages.filter((p) => p.canUserModify(game.user))
+        .map((p) => ({ key: p.name, label: p.name })) ?? [];
+
+    const matchDefaultOption = (o) => o.toString() === defaultPageNameOption.toString();
+    pageNameOptions.filter((o) => !matchDefaultOption(o)).sort((a, b) => a.sort - b.sort);
+    pageNameOptions.unshift(getDefaultPageName());
     const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? getDefaultPageName();
 
     return {
@@ -119,25 +120,21 @@ class SelectJournalConfigurationForm extends FormApplication {
   }
 
   async _updateObject(_event, formData) {
-    const { journalName, pageName = getDefaultPageName() } = formData;
+    let { journalName, pageName = getDefaultPageName() } = formData;
 
     if (journalName != null) {
       const journalNameOld = game.user.getFlag(SYSTEM, JOURNAL_NAME);
       const journal = this.getValidJournals()?.find((j) => j.name == journalName);
       if (journal != null && journalNameOld != journalName) {
         game.user.setFlag(SYSTEM, JOURNAL_NAME, journalName);
+        pageName = getDefaultPageName();
       } else if (journal == null) {
         ui.notifications.error(game.i18n.format('SMTJE.error.journalNotFound', { journalName }));
         return;
       }
 
       const pageNameOld = game.user.getFlag(SYSTEM, PAGE_NAME);
-      const page = journal.pages.getName(pageName);
-
-      if (page != null && pageName != pageNameOld) {
-        game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
-      } else if (page == null && pageName == getDefaultPageName()) {
-        await JournalEntryPage.createDocuments([{ name: pageName }], { parent: journal });
+      if (pageName != pageNameOld) {
         game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
       }
     }

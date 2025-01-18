@@ -5,13 +5,13 @@
 			"label": "Select Journal",
 			"journalSelection": "Journal",
 			"pageSelection": "Page",
-			"pageNameWarning": "If no page is chosen, a new page called Noted Messages will be created.<br/>If the selected page is deleted or renamed, a new page called Noted Messages will be created."
+			"pageNameWarning": "Only Journals and pages you have the ability to edit are displayed.\nThe default page available is called Noted Messages.\nIf the selected page is deleted or renamed, a new page called Noted Messages will be created."
 		},
 		"error": {
 			"journalNotFound": "Unable to find your chosen Journal [{journalName}]. It might have been renamed or deleted.",
 			"noJournalSet": "A Journal has not been selected in your configuration.",
-			"pageMissing": "Unable to find [{pageName}] in Journal [{journalName}]. Creating a new page with that name.",
-			"noPage": "Unable to find the correct page in Journal [{journalName}]. Creating a new page called Noted Messages."
+			"pageMissing": "Unable to find [{pageName}] in Journal [{journalName}], creating a new page with that name.",
+			"noPage": "Creating a new page called Noted Messages  in Journal [{journalName}]."
 		},
 		"defaultPageName": "Noted Messages",
 		"actionDescription": "Write Message to Journal"
