@@ -3,7 +3,7 @@ import { SYSTEM, JOURNAL_NAME, PAGE_NAME } from './settings';
 
 export function addContextMenuOptions(_html, options) {
   options.unshift({
-    name: 'saveMessageToJournalEntry.actionDescription',
+    name: 'SMTJE.actionDescription',
     icon: '<i class="fas fa-edit"></i>',
     group: SYSTEM,
     // condition: (_li) => {
@@ -15,12 +15,23 @@ export function addContextMenuOptions(_html, options) {
       if (message != null) {
         const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME);
         const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
-        const page = game.journal?.getName(journalName)?.pages.getName(pageName);
-        if (page == null) {
-          ui.notifications.error(
-            game.i18n.localize('saveMessageToJournalEntry.error.noJournalSet'),
-          );
+        const journal = game.journal?.getName(journalName);
+        const page = journal?.pages.getName(pageName);
+        if (journal == null) {
+          ui.notifications.warn(game.i18n.localize('SMTJE.error.noJournalSet'));
           return;
+        }
+        if (page == null) {
+          if (pageName == '') {
+            ui.notifications.warn(game.i18n.localize('SMTJE.error.noPage'));
+          } else {
+            ui.notifications.warn(
+              game.i18n.format('SMTJE.error.pageMissing', { pageName, journalName }),
+            );
+          }
+          const newPageName = pageName == '' ? getDefaultPageName() : pageName;
+          await JournalEntryPage.createDocuments([{ name: newPageName }], { parent: journal });
+          game.user.setFlag(SYSTEM, PAGE_NAME, newPageName);
         }
         const newEntry = await message.getHTML();
         newEntry.addClass('save-message-to-journal-entry');
@@ -49,14 +60,15 @@ class SelectJournalConfigurationForm extends FormApplication {
     return options;
   }
   get title() {
-    return game.i18n.localize('saveMessageToJournalEntry.settings.title');
+    return game.i18n.localize('SMTJE.settings.title');
   }
 
   getValidJournals() {
-    return game.journal.filter(
-      (j) =>
-        j.canUserModify(game.user) && j.pages.filter((p) => p.canUserModify(game.user)).size > 0,
-    );
+    return game.journal.filter((j) => j.canUserModify(game.user));
+  }
+
+  getDefaultPageName() {
+    return game.i18n.localize('SMTJE.defaultPageName');
   }
 
   getData(_options) {
@@ -65,12 +77,13 @@ class SelectJournalConfigurationForm extends FormApplication {
     const journalNameOptions = validJournals.map((j) => j.name);
     const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME) ?? journalNameOptions[0];
 
-    const pageNameOptions = validJournals
-      .find((j) => j.name == journalName)
-      ?.pages.filter((p) => p.canUserModify(game.user))
-      .map((p) => p.name)
-      .unshift(game.i18n.localize('saveMessageToJournalEntry.defaultPageName'));
-    const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
+    const pageNameOptions = (
+      validJournals
+        .find((j) => j.name == journalName)
+        ?.pages.filter((p) => p.canUserModify(game.user))
+        .map((p) => p.name) ?? []
+    ).unshift(getDefaultPageName());
+    const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? getDefaultPageName();
 
     return {
       journalNameOptions,
@@ -81,18 +94,15 @@ class SelectJournalConfigurationForm extends FormApplication {
   }
 
   async _updateObject(_event, formData) {
-    const defaultPageName = game.i18n.localize('saveMessageToJournalEntry.defaultPageName');
-    const { journalName, pageName = defaultPageName } = formData;
+    const { journalName, pageName = getDefaultPageName() } = formData;
 
     if (journalName != null) {
       const journalNameOld = game.user.getFlag(SYSTEM, JOURNAL_NAME);
-      const journal = this.getValidJournals()?.getName(journalName);
+      const journal = this.getValidJournals()?.find((j) => j.name == journalName);
       if (journal != null && journalNameOld != journalName) {
         game.user.setFlag(SYSTEM, JOURNAL_NAME, journalName);
       } else if (journal == null) {
-        ui.notifications.error(
-          game.i18n.format('saveMessageToJournalEntry.error.journalNotFound', { journalName }),
-        );
+        ui.notifications.error(game.i18n.format('SMTJE.error.journalNotFound', { journalName }));
         return;
       }
 
@@ -100,7 +110,7 @@ class SelectJournalConfigurationForm extends FormApplication {
       const page = journal.pages.getName(pageName);
       if (page != null && pageName != pageNameOld) {
         game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
-      } else if (page == null && pageName == defaultPageName) {
+      } else if (page == null && pageName == getDefaultPageName()) {
         await JournalEntryPage.createDocuments([{ name: pageName }], { parent: journal });
         game.user.setFlag(SYSTEM, PAGE_NAME, pageName);
       }
@@ -111,9 +121,9 @@ class SelectJournalConfigurationForm extends FormApplication {
 }
 
 export function initSettings() {
-  game.settings.registerMenu(SYSTEM, SYSTEM + 'configuration', {
-    name: 'saveMessageToJournalEntry.settings.title',
-    label: 'saveMessageToJournalEntry.settings.title',
+  game.settings.registerMenu(SYSTEM, SYSTEM + '-configuration', {
+    name: 'SMTJE.settings.name',
+    label: 'SMTJE.settings.label',
     icon: 'fas fa-cogs',
     type: SelectJournalConfigurationForm,
     restricted: false,
