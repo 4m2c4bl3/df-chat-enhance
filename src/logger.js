@@ -86,14 +86,14 @@ class SelectJournalConfigurationForm extends FormApplication {
 
     const defaultPageName = getDefaultPageName();
     const defaultPageNameOption = { key: defaultPageName, label: defaultPageName };
-    const matchDefaultOption = (o) => o.toString() === defaultPageNameOption.toString();
+    const matchDefaultOption = (o) => JSON.stringify(o) === JSON.stringify(defaultPageNameOption);
     const pageNameOptions =
       validJournals
         .find((j) => j.name == journalName)
         ?.pages?.filter((p) => p.canUserModify(game.user))
         ?.map((p) => ({ key: p.name, label: p.name }))
         ?.filter((o) => !matchDefaultOption(o))
-        ?.sort((a, b) => a.sort - b.sort) ?? {};
+        ?.sort((a, b) => a.sort - b.sort) ?? [];
     pageNameOptions.unshift(defaultPageNameOption);
     const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? defaultPageName;
 
