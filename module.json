@@ -2,7 +2,7 @@
 	"id": "save-message-to-journal-entry",
 	"title": "Save Message To Journal Entry",
 	"description": "What it says on the can.",
-	"version": "0.0.3",
+	"version": "1.0.0",
 	"author": "4m2c4bl3",
 	"esmodules": [
 		"src/main.js"
@@ -16,7 +16,7 @@
 	],
 	"url": "https://github.com/4m2c4bl3/save-message-to-journal-entry",
 	"manifest": "https://github.com/4m2c4bl3/save-message-to-journal-entry/releases/latest/download/module.json",
-	"download": "https://github.com/4m2c4bl3/save-message-to-journal-entry/releases/download/0.0.3/module.zip",
+	"download": "https://github.com/4m2c4bl3/save-message-to-journal-entry/releases/download/1.0.0/module.zip",
 	"authors": [
 		{
 			"name": "4m2c4bl3",
