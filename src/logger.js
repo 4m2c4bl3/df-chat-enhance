@@ -84,7 +84,8 @@ class SelectJournalConfigurationForm extends FormApplication {
     const journalNameOptions = validJournals.map((j) => ({ key: j.name, label: j.name }));
     const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME) ?? journalNameOptions[0];
 
-    const defaultPageNameOption = { key: getDefaultPageName(), label: getDefaultPageName() };
+    const defaultPageName = getDefaultPageName();
+    const defaultPageNameOption = { key: defaultPageName, label: defaultPageName };
     const pageNameOptions =
       validJournals
         .find((j) => j.name == journalName)
@@ -93,8 +94,8 @@ class SelectJournalConfigurationForm extends FormApplication {
 
     const matchDefaultOption = (o) => o.toString() === defaultPageNameOption.toString();
     pageNameOptions.filter((o) => !matchDefaultOption(o)).sort((a, b) => a.sort - b.sort);
-    pageNameOptions.unshift(getDefaultPageName());
-    const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? getDefaultPageName();
+    pageNameOptions.unshift(defaultPageNameOption);
+    const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? defaultPageName;
 
     return {
       journalNameOptions,
