@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 import { SYSTEM, JOURNAL_NAME, PAGE_NAME } from './settings';
 
+const getDefaultPageName = () => {
+  return game.i18n.localize('SMTJE.defaultPageName');
+};
+
 export function addContextMenuOptions(_html, options) {
   options.unshift({
     name: 'SMTJE.actionDescription',
@@ -16,21 +20,25 @@ export function addContextMenuOptions(_html, options) {
         const journalName = game.user.getFlag(SYSTEM, JOURNAL_NAME);
         const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
         const journal = game.journal?.getName(journalName);
-        const page = journal?.pages.getName(pageName);
+        let page = journal?.pages.getName(pageName);
         if (journal == null) {
           ui.notifications.warn(game.i18n.localize('SMTJE.error.noJournalSet'));
           return;
         }
         if (page == null) {
-          if (pageName == '') {
-            ui.notifications.warn(game.i18n.localize('SMTJE.error.noPage'));
+          const noPageNameSet = pageName == '' || pageName == null;
+          if (noPageNameSet) {
+            ui.notifications.info(game.i18n.format('SMTJE.error.noPage', { journalName }));
           } else {
-            ui.notifications.warn(
+            ui.notifications.info(
               game.i18n.format('SMTJE.error.pageMissing', { pageName, journalName }),
             );
           }
-          const newPageName = pageName == '' ? getDefaultPageName() : pageName;
-          await JournalEntryPage.createDocuments([{ name: newPageName }], { parent: journal });
+          const newPageName = noPageNameSet ? getDefaultPageName() : pageName;
+          await JournalEntryPage.createDocuments([{ name: newPageName }], {
+            parent: journal,
+          });
+          page = journal?.pages.getName(newPageName);
           game.user.setFlag(SYSTEM, PAGE_NAME, newPageName);
         }
         const newEntry = await message.getHTML();
@@ -41,7 +49,7 @@ export function addContextMenuOptions(_html, options) {
         metadata.replaceChildren(timestamp);
         await page.update({
           text: {
-            content: newEntry[0].outerHTML + '<hr>' + page.text.content,
+            content: newEntry[0].outerHTML + '<hr>' + (page?.text?.content ?? ''),
             format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
           },
         });
@@ -65,10 +73,6 @@ class SelectJournalConfigurationForm extends FormApplication {
 
   getValidJournals() {
     return game.journal.filter((j) => j.canUserModify(game.user));
-  }
-
-  getDefaultPageName() {
-    return game.i18n.localize('SMTJE.defaultPageName');
   }
 
   getData(_options) {
