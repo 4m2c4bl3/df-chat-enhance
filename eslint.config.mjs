@@ -21,6 +21,12 @@ export default [
 		languageOptions: {
 			globals: {
 				...globals.browser,
+				game: true,
+				ui: true,
+				JournalEntryPage: true,
+				FormApplication: true,
+				CONST: true,
+				Hooks: true
 			},
 			parserOptions: {
         projectService: true,

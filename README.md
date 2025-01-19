@@ -5,14 +5,14 @@ An incredibly basic recreation of [DF Chat Enhancements](https://github.com/flam
 
 _I do not have the time to maintain or improve this tool past making it run for my own table. I do have time to review pull requests though! :o)_
 
-**Using the right-click context menu in the Chat Messages tab, any user can chose to 'Write Message to Journal'.** This adds a copy of the chat message into the journal, with all styling preserved. 
+**Using the right-click context menu in the Chat Messages tab, any user can chose to 'Write Message to Journal'.** This adds a copy of the chat message into the journal
 * Before using this feature, each user must first select a target journal in Game Settings
-* Messages are placed at the top of whatever is already existing in the page, and should be non-destructive
 * Messages can be saved in an existing page, or a pre-named page (Noted Messages) will be created
-* Timestamps are adjusted to be permanent rather than relative, and some message management is stripped out
-* Buttons and any other fancy features in messages will/should not work in the journal page
+* Messages are placed at the top of whatever is already existing in the page, and should be non-destructive
 * Journal/page selection is based off name, so changing names will require users to update their choices in Game Settings
-* If you try and use this on a non-text journal page ... I don't know what's going to happen ....
+* Timestamps are adjusted to be permanent rather than relative, and some message management (delete button etc) is stripped out
+* Manually editing a page with saved message can and will destroy styling/formatting
+* Buttons and any other advanced features in messages will/should not work in the journal page
 * Easily split noted messages into their own entries if you use the module [Split Join Journal](https://github.com/toastygm/split-join-journal)!
 
 

@@ -1,17 +1,31 @@
 {
 	"SMTJE": {
 		"settings": {
-			"name": "Choose the Journal that messages will be saved to.",
-			"label": "Select Journal",
-			"journalSelection": "Journal",
-			"pageSelection": "Page",
-			"pageNameWarning": "Only Journals and pages you have the ability to edit are displayed.\nThe default page available is called Noted Messages.\nIf the selected page is deleted or renamed, a new page called Noted Messages will be created."
+			"defaultPage": {
+				"name": "Customize Page Name",
+				"hint": "The default page name is [Noted Messages]."
+			},
+			"configuration": {
+				"name": "Journal Configuration",
+				"label": "Journal Configuration",
+				"hint": "Select the journal for messages to be written to.",
+				"journalSelection": "Journal",
+				"pageSelection": "Page",
+				"info": {
+					"onlyEditableShown": "Only journals and pages you have the ability to edit are displayed.",
+					"pageBehavior": "If the selected page is deleted or renamed, a new page with the same name will be created."
+				}
+			}
 		},
-		"error": {
-			"journalNotFound": "Unable to find your chosen Journal [{journalName}]. It might have been renamed or deleted.",
-			"noJournalSet": "A Journal has not been selected in your configuration.",
-			"pageMissing": "Unable to find [{pageName}] in Journal [{journalName}], creating a new page with that name.",
-			"noPage": "Creating a new page called Noted Messages  in Journal [{journalName}]."
+		"notif": {
+			"journalNotFound": "Unable to find [{journalName}]. It might have been renamed or deleted.",
+			"noJournalSet": "A journal has not been selected in your configuration.",
+			"pageMissing": "Unable to find [{pageName}] in [{journalName}], creating a new page with that name.",
+			"noPageSelected": "Creating a new page called [{defaultPageName}] in [{journalName}].",
+			"permissionError": {
+				"page": "You have lost the ability to edit [{pageName}] in [{journalName}]. No message can be written.",
+				"journal": "You have lost the ability to edit [{journalName}]. No message can be written."
+			}
 		},
 		"defaultPageName": "Noted Messages",
 		"actionDescription": "Write Message to Journal"
