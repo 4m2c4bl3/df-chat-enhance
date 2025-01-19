@@ -18,7 +18,10 @@ _I do not have the time to maintain or improve this tool past making it run for 
 * Easily split noted messages into their own entries if you use the module [Split Join Journal](https://github.com/toastygm/split-join-journal)!
 
 
-![image](https://github.com/user-attachments/assets/2fece3d3-21cf-47c3-8c2b-a0e06d3ff8c4)
+![image](https://github.com/user-attachments/assets/d01a5e0a-9a5b-40a2-b1c3-63275199ce14)
+
+![image](https://github.com/user-attachments/assets/1e5e2ba8-b9f5-4aec-8abc-00b46bb3fc5d)
+
 
 ![image](https://github.com/user-attachments/assets/28ac2813-095d-4c66-ae31-bd7c801d5c78)
 
