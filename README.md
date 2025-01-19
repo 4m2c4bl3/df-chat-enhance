@@ -3,6 +3,8 @@
 
 An incredibly basic recreation of [DF Chat Enhancements](https://github.com/flamewave000/dragonflagon-fvtt/blob/master/df-chat-enhance/README.md#Adventure-Log)'s Adventure Log feature. Copy a message from chat into a page in a journal. System agnostic.
 
+`https://github.com/4m2c4bl3/save-message-to-journal-entry/releases/latest/download/module.json`
+
 _I do not have the time to maintain or improve this tool past making it run for my own table. I do have time to review pull requests though! :o)_
 
 **Using the right-click context menu in the Chat Messages tab, any user can chose to 'Write Message to Journal'.** This adds a copy of the chat message into the journal
