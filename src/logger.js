@@ -21,16 +21,16 @@ export function addContextMenuOptions(_html, options) {
           return;
         }
 
-        const pageName = game.user.getFlag(SYSTEM, PAGE_NAME);
         const journal = game.journal?.getName(journalName);
         if (journal == null) {
           ui.notifications.warn(game.i18n.format('SMTJE.error.journalNotFound', { journalName }));
           return;
         }
 
+        const pageName = game.user.getFlag(SYSTEM, PAGE_NAME) ?? '';
         let page = journal?.pages.getName(pageName);
         if (page == null) {
-          const noPageNameSet = pageName == '' || pageName == null;
+          const noPageNameSet = pageName == '';
           if (noPageNameSet) {
             ui.notifications.info(game.i18n.format('SMTJE.error.noPage', { journalName }));
           } else {
@@ -95,7 +95,7 @@ class SelectJournalConfigurationForm extends FormApplication {
     const pageNameOptions =
       validJournals
         .find((j) => j.name == journalName)
-        ?.pages?.filter((p) => p.canUserModify(game.user))
+        ?.pages?.filter((p) => p.canUserModify(game.user) && p.type === 'text')
         ?.map((p) => ({ key: p.name, label: p.name }))
         ?.filter((o) => !matchDefaultOption(o))
         ?.sort((a, b) => a.sort - b.sort) ?? [];
