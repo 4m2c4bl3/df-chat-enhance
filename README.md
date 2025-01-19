@@ -1,16 +1,20 @@
 ![](https://img.shields.io/badge/Foundry-v12-informational)
 ![Latest Release Download Count](https://img.shields.io/github/downloads/4m2c4bl3/save-message-to-journal-entry/latest/module.zip)
 
-An incredibly basic recreation of [DF Chat Enhancements](https://github.com/flamewave000/dragonflagon-fvtt/blob/master/df-chat-enhance/README.md#Adventure-Log)'s Adventure Log feature.
+An incredibly basic recreation of [DF Chat Enhancements](https://github.com/flamewave000/dragonflagon-fvtt/blob/master/df-chat-enhance/README.md#Adventure-Log)'s Adventure Log feature. Copy a message from chat into a page in a journal. System agnostic.
 
-* Each player can set a Journal to use for their saved messages
-* Messages will be saved in an existing page if chosen, or a pre-named page (Noted Messages) is created
-* Using the right-click context menu in the Chat Messages tab, you can select 'Write Message to Journal'
-* Newly written messages are at the top of the journal page, with older ones down at the bottom
-* Timestamps are adjusted to be permanent rather than relative, and some message management is stripped out, but other than that the messages are left unedited
-* Selection is based off name, so changing names will require the Journal/page to be reselected in the settings
+_I do not have the time to maintain or improve this tool past making it run for my own table. I do have time to review pull requests though! :o)_
 
-I do not have the time or ability to maintain this tool beyond what is needed for my game sessions, requests for features can be opened but will rely on another dev coming in and improving it out of the kindness of their heart. :o)
+**Using the right-click context menu in the Chat Messages tab, any user can chose to 'Write Message to Journal'.** This adds a copy of the chat message into the journal, with all styling preserved. 
+* Before using this feature, each user must first select a target journal in Game Settings
+* Messages are placed at the top of whatever is already existing in the page, and should be non-destructive
+* Messages can be saved in an existing page, or a pre-named page (Noted Messages) will be created
+* Timestamps are adjusted to be permanent rather than relative, and some message management is stripped out
+* Buttons and any other fancy features in messages will/should not work in the journal page
+* Journal/page selection is based off name, so changing names will require users to update their choices in Game Settings
+* If you try and use this on a non-text journal page ... I don't know what's going to happen ....
+* Easily split noted messages into their own entries if you use the module [Split Join Journal](https://github.com/toastygm/split-join-journal)!
+
 
 ![image](https://github.com/user-attachments/assets/2fece3d3-21cf-47c3-8c2b-a0e06d3ff8c4)
 
